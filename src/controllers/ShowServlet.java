@@ -21,16 +21,13 @@ public class ShowServlet extends HttpServlet {
         super();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-           EntityManager em = DBUtil.createEntityManager();
+        EntityManager em = DBUtil.createEntityManager();
+        Tasks t = em.find(Tasks.class, Integer.parseInt(request.getParameter("id")));
 
-            Tasks t = em.find(Tasks.class, Integer.parseInt(request.getParameter("id")));
+        em.close();
+        request.setAttribute("task", t);
 
-            em.close();
-
-            request.setAttribute("task", t);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
-            rd.forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
+        rd.forward(request, response);
     }
-
 }

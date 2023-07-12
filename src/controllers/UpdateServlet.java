@@ -49,15 +49,14 @@ public class UpdateServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
                 rd.forward(request, response);
             } else {
-            em.getTransaction().begin();
-            em.getTransaction().commit();
-            request.getSession().setAttribute("flush", "更新が完了しました。");
-            em.close();
+                em.getTransaction().begin();
+                em.getTransaction().commit();
+                request.getSession().setAttribute("flush", "更新が完了しました。");
+                em.close();
 
-            request.getSession().removeAttribute("task_id");
-
-            response.sendRedirect(request.getContextPath() + "/index");
+                request.getSession().removeAttribute("task_id");
+                response.sendRedirect(request.getContextPath() + "/index");
+            }
         }
     }
-}
 }
