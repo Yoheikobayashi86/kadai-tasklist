@@ -13,10 +13,10 @@ import models.Tasks;
 import utils.DBUtil;
 
 @WebServlet("/destroy")
-public class Destroy extends HttpServlet {
+public class DestroyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public Destroy() {
+    public DestroyServlet() {
         super();
     }
 
@@ -30,6 +30,7 @@ public class Destroy extends HttpServlet {
             em.getTransaction().begin();
             em.remove(t);
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "削除が完了しました。");
             em.close();
 
             request.getSession().removeAttribute("task_id");
